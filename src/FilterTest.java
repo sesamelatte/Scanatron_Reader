@@ -32,4 +32,13 @@ public class FilterTest {
 
         DisplayWindow.showFor("assets/page1.png");
     }
+    public short[][] crop(short[][] grid, int height, int width) {
+        short[][] newGrid = new short[height][width];
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                newGrid[row][col] = grid[row][col];
+            }
+        }
+        return newGrid;
+    }
 }
