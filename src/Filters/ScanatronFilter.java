@@ -4,6 +4,7 @@ import Interfaces.PixelFilter;
 import core.DImage;
 
 public class ScanatronFilter implements PixelFilter {
+    int bubblesCount, bubbleVertSpacing, bubbleHoriSpacing;
 
     @Override
     public DImage processImage(DImage img) {
@@ -14,17 +15,15 @@ public class ScanatronFilter implements PixelFilter {
         return img;
     }
 
-    public Integer[][] getBubbled(){
-        if(bubbleRowExists()){
-            for (int i = 0; i < bubblespacing; i++) {
+    public String[] getBubble(short[][] grid){
+        for (int j = 0; j < grid.length; j += bubbleVertSpacing){
+            for (int i = 0; i < bubblesCount; i+= bubbleHoriSpacing) {
                 store isBubbled;
             }
         }
     }
 
-    public boolean bubbleRowExists(){
-
-    }
+    public Double geta
 
     public boolean isBubbled(){}
 }
