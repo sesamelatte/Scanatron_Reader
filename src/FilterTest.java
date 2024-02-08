@@ -9,7 +9,7 @@ public class FilterTest {
     public static String currentFolder = System.getProperty("user.dir") + "/";
 
     public static void main(String[] args) {
-        //SaveAndDisplayExample();
+        // SaveAndDisplayExample();
 
         RunTheFilter();
     }
@@ -29,7 +29,7 @@ public class FilterTest {
     }
 
     private static void SaveAndDisplayExample() {
-        PImage img = PDFHelper.getPageImage("assets/omrtest.pdf",1);
+        PImage img = PDFHelper.getPageImage("assets/OfficialOMRSampleDoc.pdf",1);
         img.save(currentFolder + "assets/page1.png");
 
         DisplayWindow.showFor("assets/page1.png");
