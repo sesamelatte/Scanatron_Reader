@@ -16,11 +16,19 @@ public class ScanatronFilter implements PixelFilter {
     public DImage processImage(DImage img) {
         short[][] grid = img.getBWPixelGrid();
         // Do stuff with color channels here
-
-        img.setPixels(grid);
+        short[][] newGrid = crop(grid, 0,0,500,500);
+        img.setPixels(newGrid);
         return img;
     }
-
+    public short[][] crop(short[][] grid, int r1, int c1, int height, int width) {
+        short[][] newGrid = new short[height][width];
+        for (int row = r1; row < height; row++) {
+            for (int col = c1; col < width; col++) {
+                newGrid[row][col] = grid[row][col];
+            }
+        }
+        return newGrid;
+    }
     public ArrayList<String> getAnswers(short[][] grid){
         ArrayList<String> answers = new ArrayList<>();
         for (int j = 0; j < grid.length; j += bubbleVertSpacing){
