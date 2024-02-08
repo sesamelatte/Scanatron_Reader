@@ -3,8 +3,14 @@ package Filters;
 import Interfaces.PixelFilter;
 import core.DImage;
 
+import java.util.ArrayList;
+
 public class ScanatronFilter implements PixelFilter {
-    int bubblesCount, bubbleVertSpacing, bubbleHoriSpacing;
+    int bubbleRowCount = 5;
+    int bubbleVertSpacing = 50;
+    int bubbleHoriSpacing;
+
+    String s = "ABCDEFGH";
 
     @Override
     public DImage processImage(DImage img) {
@@ -15,15 +21,19 @@ public class ScanatronFilter implements PixelFilter {
         return img;
     }
 
-    public String[] getBubble(short[][] grid){
+    public ArrayList<String> getAnswers(short[][] grid){
+        ArrayList<String> answers = new ArrayList<>();
         for (int j = 0; j < grid.length; j += bubbleVertSpacing){
-            for (int i = 0; i < bubblesCount; i+= bubbleHoriSpacing) {
-                store isBubbled;
-            }
+
         }
+        return answers;
     }
 
-    public Double geta
+    public Double[] storeBubblesBlackAverage(short[][] grid){
+        Double[] bubblesBlackAverage = new Double[0];
+        for (int i = 0; i < bubbleRowCount; i += bubbleHoriSpacing) {
 
-    public boolean isBubbled(){}
+        }
+        return bubblesBlackAverage;
+    }
 }
