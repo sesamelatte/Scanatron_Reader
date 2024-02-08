@@ -9,7 +9,7 @@ public class FilterTest {
     public static String currentFolder = System.getProperty("user.dir") + "/";
 
     public static void main(String[] args) {
-        // SaveAndDisplayExample();
+        //SaveAndDisplayExample();
 
         RunTheFilter();
     }
@@ -19,6 +19,8 @@ public class FilterTest {
         PImage in = PDFHelper.getPageImage("assets/omrtest.pdf",1);
         DImage img = new DImage(in);       // you can make a DImage from a PImage
 
+        short[][] grid = img.getBWPixelGrid();
+        grid = crop(grid, 0, 0, 500, 500);
         System.out.println("Running filter on page 1....");
         DisplayInfoFilter filter = new DisplayInfoFilter();
         filter.processImage(img);  // if you want, you can make a different method
@@ -32,10 +34,10 @@ public class FilterTest {
 
         DisplayWindow.showFor("assets/page1.png");
     }
-    public short[][] crop(short[][] grid, int height, int width) {
+    public static short[][] crop(short[][] grid, int r1, int c1, int height, int width) {
         short[][] newGrid = new short[height][width];
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
+        for (int row = r1; row < height; row++) {
+            for (int col = c1; col < width; col++) {
                 newGrid[row][col] = grid[row][col];
             }
         }
