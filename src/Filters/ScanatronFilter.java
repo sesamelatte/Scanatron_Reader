@@ -24,13 +24,13 @@ public class ScanatronFilter implements PixelFilter {
     public ArrayList<String> getAnswers(short[][] grid){
         ArrayList<String> answers = new ArrayList<>();
         for (int j = 0; j < grid.length; j += bubbleVertSpacing){
-
+            double[] bubblesBlackAverage = storeBubblesBlackAverage(grid);
         }
         return answers;
     }
 
-    public Double[] storeBubblesBlackAverage(short[][] grid){
-        Double[] bubblesBlackAverage = new Double[0];
+    public double[] storeBubblesBlackAverage(short[][] grid){
+        double[] bubblesBlackAverage = new double[0];
         for (int i = 0; i < bubbleRowCount; i += bubbleHoriSpacing) {
 
         }

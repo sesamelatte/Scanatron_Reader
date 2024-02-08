@@ -9,9 +9,9 @@ public class FilterTest {
     public static String currentFolder = System.getProperty("user.dir") + "/";
 
     public static void main(String[] args) {
-        SaveAndDisplayExample();
+        //SaveAndDisplayExample();
 
-        //RunTheFilter();
+        RunTheFilter();
     }
 
     private static void RunTheFilter() {
@@ -20,7 +20,7 @@ public class FilterTest {
         DImage img = new DImage(in);       // you can make a DImage from a PImage
 
         short[][] grid = img.getBWPixelGrid();
-        grid = crop(grid, 0, 0, 500, 500);
+        crop(grid, 0, 0, 500, 500);
         System.out.println("Running filter on page 1....");
         DisplayInfoFilter filter = new DisplayInfoFilter();
         filter.processImage(img);  // if you want, you can make a different method
