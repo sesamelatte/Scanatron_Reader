@@ -29,23 +29,35 @@ public class ScanatronFilter implements PixelFilter {
         }
         return newGrid;
     }
-    public ArrayList<String> getAnswers(short[][] grid){
+    public ArrayList<String> getAnswers(short[][] grid, int x, int y1){
         ArrayList<String> answers = new ArrayList<>();
-        for (int i = 0; i < grid.length; i += bubbleVertSpacing){
-
+        for (int y = 0; y < grid.length; y += bubbleVertSpacing){
+            answers.add(getAnswer(grid, x, y1 + y));
         }
         return answers;
     }
 
-    public String returnAnswer(){
+    public double[] getBubbleBlackValue(short[][] grid, int x1, int y){
         double[] bubbleBlackValue = new double[bubbleRowCount];
-        for (int i = 0; i < bubbleRowCount; i += bubbleHoriSpacing) {
-
-            bubbleBlackValue
+        for (int i = 0; i < bubbleRowCount; i ++) {
+            int x = x1 + (i * bubbleHoriSpacing);
+            bubbleBlackValue[i] = getBubbleBlack(grid, x, y, 20);
         }
+        return bubbleBlackValue;
     }
 
-    public Double getBubbleBlack(int x, int y, int bubbleS){
-
+    public String getAnswer(short[][] grid, int x1, int y){
+        double[] bubbleBlackValue = getBubbleBlackValue(grid, x1, y);
+        double MAX = 0;
+        int MAXINDEX = 0;
+        for (int i = 0; i < bubbleBlackValue.length; i++) {
+            if(bubbleBlackValue[i] > MAX){
+                MAXINDEX = i;
+            }
+        }
+        return s.substring(MAXINDEX, MAXINDEX + 1);
+    }
+    public Double getBubbleBlack(short[][] grid, int x, int y, int bubbleS){
+        //thresehold
     }
 }
