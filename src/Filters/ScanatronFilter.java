@@ -3,6 +3,7 @@ package Filters;
 import Interfaces.PixelFilter;
 import core.DImage;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ScanatronFilter implements PixelFilter {
@@ -17,6 +18,8 @@ public class ScanatronFilter implements PixelFilter {
         short[][] grid = img.getBWPixelGrid();
         // Do stuff with color channels here
         short[][] newGrid = crop(grid, 0,0,500,500);
+        ArrayList<String> answers = getAnswers(newGrid, 106, 158);
+
         img.setPixels(newGrid);
         return img;
     }
@@ -31,21 +34,11 @@ public class ScanatronFilter implements PixelFilter {
     }
     public ArrayList<String> getAnswers(short[][] grid, int x, int y1){
         ArrayList<String> answers = new ArrayList<>();
-        for (int y = 0; y < grid.length; y += bubbleVertSpacing){
-            answers.add(getAnswer(grid, x, y1 + y));
+        for (int y = y1; y < grid.length; y += bubbleVertSpacing){
+            answers.add(getAnswer(grid, x, y));
         }
         return answers;
     }
-
-    public double[] getBubbleBlackValue(short[][] grid, int x1, int y){
-        double[] bubbleBlackValue = new double[bubbleRowCount];
-        for (int i = 0; i < bubbleRowCount; i ++) {
-            int x = x1 + (i * bubbleHoriSpacing);
-            bubbleBlackValue[i] = getBubbleBlack(grid, x, y, 20);
-        }
-        return bubbleBlackValue;
-    }
-
     public String getAnswer(short[][] grid, int x1, int y){
         double[] bubbleBlackValue = getBubbleBlackValue(grid, x1, y);
         double MAX = 0;
@@ -57,7 +50,21 @@ public class ScanatronFilter implements PixelFilter {
         }
         return s.substring(MAXINDEX, MAXINDEX + 1);
     }
-    public Double getBubbleBlack(short[][] grid, int x, int y, int bubbleS){
-        //thresehold
+    public double[] getBubbleBlackValue(short[][] grid, int x1, int y){
+        double[] bubbleBlackValue = new double[bubbleRowCount];
+        for (int i = 0; i < bubbleRowCount; i ++) {
+            int x = x1 + (i * bubbleHoriSpacing);
+            bubbleBlackValue[i] = getBubbleBlack(grid, x, y, 20);
+        }
+        return bubbleBlackValue;
+    }
+    public double getBubbleBlack(short[][] grid, int x1, int y1, int bubbleS){
+        for (int x = x1; x < x + bubbleS; x++) {
+            for (int y = y1; y < y + bubbleS; y++) {
+                if(grid[x][y] == 0){
+
+                }
+            }
+        }
     }
 }
