@@ -31,17 +31,21 @@ public class ScanatronFilter implements PixelFilter {
     }
     public ArrayList<String> getAnswers(short[][] grid){
         ArrayList<String> answers = new ArrayList<>();
-        for (int j = 0; j < grid.length; j += bubbleVertSpacing){
-            double[] bubblesBlackAverage = storeBubblesBlackAverage(grid);
+        for (int i = 0; i < grid.length; i += bubbleVertSpacing){
+
         }
         return answers;
     }
 
-    public double[] storeBubblesBlackAverage(short[][] grid){
-        double[] bubblesBlackAverage = new double[0];
+    public String returnAnswer(){
+        double[] bubbleBlackValue = new double[bubbleRowCount];
         for (int i = 0; i < bubbleRowCount; i += bubbleHoriSpacing) {
 
+            bubbleBlackValue
         }
-        return bubblesBlackAverage;
+    }
+
+    public Double getBubbleBlack(int x, int y, int bubbleS){
+
     }
 }
