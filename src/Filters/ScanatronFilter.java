@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class ScanatronFilter implements PixelFilter {
     int bubbleRowCount = 5;
-    int bubbleVertSpacing = 47;
-    int bubbleHoriSpacing = 26;
+    int bubbleVertSpacing = 50;
+    int bubbleHoriSpacing = 23;
 
     String s = "ABCDEFGH";
 
@@ -17,7 +17,7 @@ public class ScanatronFilter implements PixelFilter {
         short[][] grid = img.getBWPixelGrid();
         // Do stuff with color channels here
         short[][] newGrid = crop(grid, 0,0,500,500);
-       // ArrayList<String> answers = getAnswers(newGrid, 106, 158);
+        ArrayList<String> answers = getAnswers(grid, 104, 109, 275, 132);
 
         img.setPixels(newGrid);
         return img;
@@ -31,15 +31,21 @@ public class ScanatronFilter implements PixelFilter {
         }
         return newGrid;
     }
-    public ArrayList<String> getAnswers(short[][] grid, int x, int y1){
+    public ArrayList<String> getAnswers(short[][] grid, int x1, int yi1, int x2, int yi2){
         ArrayList<String> answers = new ArrayList<>();
-        for (int y = y1; y < grid.length; y += bubbleVertSpacing){
-            answers.add(getAnswer(grid, x, y));
+
+        for (int y1 = yi1; y1 < grid.length - bubbleVertSpacing; y1 += bubbleVertSpacing){
+            answers.add(getAnswer(grid, x1, y1));
         }
+
+        for (int y2 = yi2; y2 < grid.length - bubbleVertSpacing; y2 += bubbleVertSpacing){
+            answers.add(getAnswer(grid, x2, y2));
+        }
+
         return answers;
     }
     public String getAnswer(short[][] grid, int x1, int y){
-        double[] bubbleBlackValue = getBubbleAverage(grid, x1, y);
+        double[] bubbleBlackValue = getBubbleAverages(grid, x1, y);
         double MAX = 0;
         int MAXINDEX = 0;
         for (int i = 0; i < bubbleBlackValue.length; i++) {
@@ -49,21 +55,21 @@ public class ScanatronFilter implements PixelFilter {
         }
         return s.substring(MAXINDEX, MAXINDEX + 1);
     }
-    public double[] getBubbleAverage(short[][] grid, int x1, int y){
-        double[] bubbleAverage = new double[bubbleRowCount];
+    public double[] getBubbleAverages(short[][] grid, int x1, int y){
+        double[] bubbleAverages = new double[bubbleRowCount];
         for (int i = 0; i < bubbleRowCount; i ++) {
             int x = x1 + (i * bubbleHoriSpacing);
-            bubbleAverage[i] = getBubbleAverage(grid, x, y, 19);
+            bubbleAverages[i] = getBubbleAverage(grid, x, y, 18);
         }
-        return bubbleAverage;
+        return bubbleAverages;
     }
     public double getBubbleAverage(short[][] grid, int x1, int y1, int bubbleS){
         int totalBubblePixels = 0;
         int blackPixels = 0;
-        for (int x = x1; x < x + bubbleS; x++) {
-            for (int y = y1; y < y + bubbleS; y++) {
+        for (int x = x1; x < x1 + bubbleS; x++) {
+            for (int y = y1; y < y1 + bubbleS; y++) {
                 totalBubblePixels++;
-                if(grid[x][y] == 0){
+                if(grid[y][x] == 0){
                     blackPixels++;
                 }
             }
