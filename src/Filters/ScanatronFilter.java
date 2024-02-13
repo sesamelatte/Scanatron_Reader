@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class ScanatronFilter implements PixelFilter {
     int bubbleRowCount = 5;
-    int bubbleVertSpacing = 50;
-    int bubbleHoriSpacing;
+    int bubbleVertSpacing = 47;
+    int bubbleHoriSpacing = 26;
 
     String s = "ABCDEFGH";
 
@@ -17,7 +17,7 @@ public class ScanatronFilter implements PixelFilter {
         short[][] grid = img.getBWPixelGrid();
         // Do stuff with color channels here
         short[][] newGrid = crop(grid, 0,0,500,500);
-        ArrayList<String> answers = getAnswers(newGrid, 106, 158);
+       // ArrayList<String> answers = getAnswers(newGrid, 106, 158);
 
         img.setPixels(newGrid);
         return img;
@@ -53,7 +53,7 @@ public class ScanatronFilter implements PixelFilter {
         double[] bubbleAverage = new double[bubbleRowCount];
         for (int i = 0; i < bubbleRowCount; i ++) {
             int x = x1 + (i * bubbleHoriSpacing);
-            bubbleAverage[i] = getBubbleAverage(grid, x, y, 20);
+            bubbleAverage[i] = getBubbleAverage(grid, x, y, 19);
         }
         return bubbleAverage;
     }
