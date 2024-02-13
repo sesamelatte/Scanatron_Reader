@@ -59,11 +59,11 @@ public class ScanatronFilter implements PixelFilter {
         double[] bubbleAverages = new double[bubbleRowCount];
         for (int i = 0; i < bubbleRowCount; i ++) {
             int x = x1 + (i * bubbleHoriSpacing);
-            bubbleAverages[i] = getBubbleAverages(grid, x, y, 18);
+            bubbleAverages[i] = getBubbleAverage(grid, x, y, 18);
         }
         return bubbleAverages;
     }
-    public double getBubbleAverages(short[][] grid, int x1, int y1, int bubbleS){
+    public double getBubbleAverage(short[][] grid, int x1, int y1, int bubbleS){
         int totalBubblePixels = 0;
         int blackPixels = 0;
         for (int x = x1; x < x1 + bubbleS; x++) {
