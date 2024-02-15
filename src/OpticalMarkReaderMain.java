@@ -17,18 +17,7 @@ public class OpticalMarkReaderMain {
          */
 
     }
-    public static void writeDataToFile(String filePath, String data) throws IOException {
-        try (FileWriter f = new FileWriter(filePath);
-             BufferedWriter b = new BufferedWriter(f);
-             PrintWriter writer = new PrintWriter(b);) {
 
-            writer.println(data);
-
-        } catch (IOException error) {
-            System.err.println("There was a problem writing to the file: " + filePath);
-            error.printStackTrace();
-        }
-    }
 
     private static String fileChooser() {
         String userDirLocation = System.getProperty("user.dir");
