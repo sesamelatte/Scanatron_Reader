@@ -3,6 +3,8 @@ package Filters;
 import Interfaces.PixelFilter;
 import core.DImage;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ScanatronFilter implements PixelFilter {
@@ -43,8 +45,11 @@ public class ScanatronFilter implements PixelFilter {
         }
         return newGrid;
     }
-
-
+    public void writeText(ArrayList pageAnswers) throws IOException {
+        PrintWriter writer = new PrintWriter("answers.txt");
+        writer.println("");
+        writer.close();
+    }
     public int getAverage (short[][] grid, int r, int c) { //for one bubble
         int sum = 0;
         for (int row = r; row <= r + bubbleSize; row++) {
