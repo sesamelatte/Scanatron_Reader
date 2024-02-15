@@ -22,16 +22,7 @@ public class ScanatronFilter implements PixelFilter {
         short[][] grid = img.getBWPixelGrid();
         short[][] newGrid = crop(grid, 0,0,700,700);
 
-        ArrayList<String> allAnswers = new ArrayList<>();
-        for (int row = startingRow; row < lastRow; row+=rowInterval) { //looping through question rows
-            ArrayList<Integer> answersForRow = new ArrayList<>();
-            for (int col = startingCol; col < lastCol; col+= colInterval) { //looping through each question's bubbles
-                answersForRow.add(getAverage(newGrid, row, col));
-            }
-            String rowAnswer = convertAnswer(getAnswer(answersForRow));
-            allAnswers.add(rowAnswer);
-        }
-        System.out.println(allAnswers);
+        System.out.println(findAnswersForAPage(newGrid));
 
         img.setPixels(newGrid);
         return img;
@@ -49,6 +40,18 @@ public class ScanatronFilter implements PixelFilter {
         PrintWriter writer = new PrintWriter("answers.txt");
         writer.println("");
         writer.close();
+    }
+    public ArrayList<String> findAnswersForAPage (short[][] newGrid) {
+        ArrayList<String> allAnswers = new ArrayList<>();
+        for (int row = startingRow; row < lastRow; row+=rowInterval) { //looping through question rows
+            ArrayList<Integer> answersForRow = new ArrayList<>();
+            for (int col = startingCol; col < lastCol; col+= colInterval) { //looping through each question's bubbles
+                answersForRow.add(getAverage(newGrid, row, col));
+            }
+            String rowAnswer = convertAnswer(getAnswer(answersForRow));
+            allAnswers.add(rowAnswer);
+        }
+        return allAnswers;
     }
     public int getAverage (short[][] grid, int r, int c) { //for one bubble
         int sum = 0;
@@ -77,6 +80,11 @@ public class ScanatronFilter implements PixelFilter {
         return letterAnswer;
         //add check for if answerInteger = -1
     }
+}
+
+
+
+
 //    int bubbleRowCount = 5;
 //    int bubbleVertSpacing = 48;
 //    int bubbleHoriSpacing = 25;
@@ -147,4 +155,3 @@ public class ScanatronFilter implements PixelFilter {
 //        }
 //        return (double) totalBubblePixels/blackPixels;
 //    }
-}
