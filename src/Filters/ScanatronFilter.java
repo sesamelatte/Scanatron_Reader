@@ -41,7 +41,7 @@ public class ScanatronFilter implements PixelFilter {
 
     public void writeText(ArrayList pageAnswers) throws IOException {
         String out = arrayListToString(pageAnswers);
-        writeDataToFile("src/FileIO/answers.csv", out);
+        writeDataToFile("src/answers.csv", out);
 /*        PrintWriter writer = new PrintWriter("answers.txt");
         writer.println("");
         writer.close();*/
