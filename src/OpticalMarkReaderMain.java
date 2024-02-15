@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.io.File;
+import java.io.*;
 
 // Author: David Dobervich (this is my edit)
 // ANOTHER EDIT.
@@ -16,6 +16,18 @@ public class OpticalMarkReaderMain {
         (4).  Output 2 csv files
          */
 
+    }
+    public static void writeDataToFile(String filePath, String data) throws IOException {
+        try (FileWriter f = new FileWriter(filePath);
+             BufferedWriter b = new BufferedWriter(f);
+             PrintWriter writer = new PrintWriter(b);) {
+
+            writer.println(data);
+
+        } catch (IOException error) {
+            System.err.println("There was a problem writing to the file: " + filePath);
+            error.printStackTrace();
+        }
     }
 
     private static String fileChooser() {
